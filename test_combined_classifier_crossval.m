@@ -7,16 +7,17 @@ a = a*preproc;
 %%
 %Feature selection
 im_feat_red = select_features(im_feat,15)
-im_prof_red = select_features(im_feat,12)
+%im_prof_red = select_features(im_feat,12)
+im_prof_red = im_prof
 
 %%
-[pca_mapped_im_feat, pca_map_im_feat] = do_pca(im_feat_red,6)
-[pca_mapped_im_prof, pca_map_im_prof] = do_pca(im_prof_red,6)
+[pca_mapped_im_feat, pca_map_im_feat] = do_pca(im_feat_red,12)
+[pca_mapped_im_prof, pca_map_im_prof] = do_pca(im_prof_red,12)
 [pca_mapped_im_raw, pca_map_im_raw] = do_pca(im_raw,18)
 
 %%
-c1 = ldc;
-c2 = loglc;
+c1 = loglc
+c2 = knnc([],5)
 c3 = [nmc*classc ldc*classc qdc*classc]*fisherc;
 combined_untrained_classifier = [c1*classc; c2*classc; c3*classc]*prodc
 
