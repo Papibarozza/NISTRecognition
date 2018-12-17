@@ -4,6 +4,6 @@ function our_dataset = our_im_convolutions2(a)
     i=1;
     while(i<nmbr_obj+1)
         feature_matrix = [feature_matrix; our_convolution_extraction2(+(a(i)))];
-        i=i+1
+        i=i+1;
     end
     our_dataset = prdataset(feature_matrix, getlabels(a));
