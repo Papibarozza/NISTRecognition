@@ -33,5 +33,5 @@ t_1 = test_features(:,1:2)
 t_2 =test_features(:,3:4)
 t_3 = pr_dataset(test);
 t_3*c_4*testc
-t_2*c_2*testc
+t_2*c_2*testc  
 %[t_3 t_3]*combined_classifier*testc
