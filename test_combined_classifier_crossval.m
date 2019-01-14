@@ -11,10 +11,13 @@ a = a*preproc;
 %im_prof_red = im_prof
 
 %%
-c1 = pcam([],12)*loglc
-c2 = pcam([],12)*knnc([],5)
-c3 = pcam([],50)*parzen(0.5);
+c1 = pcam([],12)*qdc;
+c2 = pcam([],12)*qdc;
+c3 = pcam([],50)*qdc;
 c4 = pcam([],20)*qdc;
-combined_untrained_classifier = [c1*classc; c2*classc; c3*classc; c4*classc;]*prodc
-[Err, Std] = prcrossval([im_feat im_prof im_raw im_conv], combined_untrained_classifier, 10,2)
+c5 = pcam([],10)*qdc;
+%%
+combined_untrained_classifier = [c1*classc; c2*classc; c3*classc; c4*classc;]*prodc;
+%%
+[Err, Std] = prcrossval([im_feat im_prof im_raw im_conv], combined_untrained_classifier, 10,10)
 
