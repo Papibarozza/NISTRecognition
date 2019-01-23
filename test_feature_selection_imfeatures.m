@@ -1,4 +1,5 @@
 a = prnist([0:9],[1:5:1000]);
+%%
 preproc = im_box([],2,2)*im_resize([],[20 20]);
 a = a*preproc;
 %%

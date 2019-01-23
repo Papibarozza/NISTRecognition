@@ -1,0 +1,14 @@
+%'../Digits/digits-black.bmp'
+%function img_objects = extract_digits_from_img(filename)
+filename = '
+A = imread(filename);
+bboxes = regionprops(A,'BoundingBox')
+img_objects = [];
+for i = [1:size(bboxes,1)] 
+    rect = bboxes(i)
+    %curr_img = imresize(imcrop(B,rect.BoundingBox)*im_box([],10),[20 20])
+    curr_img = imcrop(A,rect.BoundingBox)*im_box([],2,2)*im_resize([],[20 20]);
+    img_objects = cat(3,img_objects,curr_img);
+end
+
+
