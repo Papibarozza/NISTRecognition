@@ -1,6 +1,6 @@
 
 function pixel_values = our_convolution_extraction(img_data)
-b = +img_data;
+b = +img_data
 b = reshape(b, [20 20])
 stride_width = 2;
 stride_height = 2;
