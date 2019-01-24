@@ -1,4 +1,4 @@
-%'../Digits/test.bmp'
+
 function img_objects = extract_digits_from_img(filename)
 A = imread(filename);
 %If input is RGB we need to convert it, but it wont work if the input is
@@ -16,10 +16,7 @@ for i = [1:CC.NumObjects]
     pixel_idx = cell2mat(CC.PixelIdxList(i));
     B(pixel_idx) = 1;
     rect = regionprops(B,'BoundingBox');
-    %curr_img = imresize(imcrop(B,rect.BoundingBox)*im_box([],10),[20 20])
     curr_img = im2bw(imcrop(A,rect.BoundingBox)*im_box([],2,2)*im_resize([],[20 20]));
-    %figure(i)
-    %show(curr_img)
     try
         img_objects = cat(3,img_objects,curr_img);
     end
