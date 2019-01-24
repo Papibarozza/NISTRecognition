@@ -1,14 +1,31 @@
-%'../Digits/digits-black.bmp'
+%'../Digits/test.bmp'
 %function img_objects = extract_digits_from_img(filename)
-filename = '
+filename = '../Digits/low-pixel.png';
 A = imread(filename);
-bboxes = regionprops(A,'BoundingBox')
+
+%If input is RGB we need to convert it, but it wont work if the input is
+%not RGB hence the try-catch.
+try
+A = rgb2gray(A);
+catch
+    A=A
+end
+
+CC =bwconncomp(A);
+B = zeros(size(A));
 img_objects = [];
-for i = [1:size(bboxes,1)] 
-    rect = bboxes(i)
+for i = [1:CC.NumObjects]
+    pixel_idx = cell2mat(CC.PixelIdxList(i));
+    B(pixel_idx) = 1;
+    rect = regionprops(B,'BoundingBox');
     %curr_img = imresize(imcrop(B,rect.BoundingBox)*im_box([],10),[20 20])
-    curr_img = imcrop(A,rect.BoundingBox)*im_box([],2,2)*im_resize([],[20 20]);
-    img_objects = cat(3,img_objects,curr_img);
+    curr_img = imcrop(A,rect.BoundingBox)*im_resize([],[20 20])*im_box([],2,2);
+    figure(i)
+    show(curr_img)
+    try
+        img_objects = cat(3,img_objects,curr_img);
+    end
+    B = zeros(size(A));
 end
 
 

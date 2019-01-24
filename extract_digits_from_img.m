@@ -1,8 +1,6 @@
 %'../Digits/test.bmp'
-%function img_objects = extract_digits_from_img(filename)
-filename = '../Digits/test.png';
+function img_objects = extract_digits_from_img(filename)
 A = imread(filename);
-
 %If input is RGB we need to convert it, but it wont work if the input is
 %not RGB hence the try-catch.
 try
@@ -19,8 +17,12 @@ for i = [1:CC.NumObjects]
     B(pixel_idx) = 1;
     rect = regionprops(B,'BoundingBox');
     %curr_img = imresize(imcrop(B,rect.BoundingBox)*im_box([],10),[20 20])
-    curr_img = +imcrop(A,rect.BoundingBox)*im_resize([],[20 20])*im_box([],2,2);
-    img_objects = cat(3,img_objects,curr_img);
+    curr_img = im2bw(imcrop(A,rect.BoundingBox)*im_box([],2,2)*im_resize([],[20 20]));
+    %figure(i)
+    %show(curr_img)
+    try
+        img_objects = cat(3,img_objects,curr_img);
+    end
     B = zeros(size(A));
 end
 
